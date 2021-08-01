@@ -4,7 +4,7 @@ import styled from 'styled-components'
 function Header() {
     return (
         <Nav>
-            <Logo src="/images/logo.svg" />
+            <Logo src="/images/logo.png" />
             <NavMenu>
                 <a>
                     <img src="/images/home-icon.svg" />

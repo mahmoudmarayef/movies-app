@@ -1,38 +1,93 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { auth, provider } from '../firebase'
 import styled from 'styled-components'
+import { useHistory } from 'react-router'
+import {
+    selectUserName,
+    selectUserPhoto,
+    setUserLogin,
+    setSignOut,
+} from "../features/user/userSlice"
+import { useSelector, useDispatch } from 'react-redux' 
 
 function Header() {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const userName = useSelector(selectUserName);
+    const userPhoto = useSelector(selectUserPhoto);
+
+    useEffect(() => {
+        auth.onAuthStateChanged(async (user) => {
+            if(user) {
+                dispatch(setUserLogin({
+                    name: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL
+                }));
+                history.push("/");
+            }
+        })
+    }, [])
+
+    const signIn = () => {
+        auth.signInWithPopup(provider)
+        .then((result) => {
+            let user = result.user;
+            dispatch(setUserLogin({
+                name: user.displayName,
+                email: user.email,
+                photo: user.photoURL
+            }));
+            history.push("/");
+        })
+    }
+
+    const signOut = () => {
+        auth.signOut()
+        .then(() => {
+            dispatch(setSignOut());
+            history.push("/login");
+        })
+    }
+
     return (
         <Nav>
             <Logo src="/images/logo.png" alt="" />
-            <NavMenu>
-                <a>
-                    <img src="/images/home-icon.svg" alt="" />
-                    <span>HOME</span>
-                </a>
-                <a>
-                    <img src="/images/search-icon.svg" alt="" />
-                    <span>SEARCH</span>
-                </a>
-                <a>
-                    <img src="/images/watchlist-icon.svg" alt="" />
-                    <span>WATCHLIST</span>
-                </a>
-                <a>
-                    <img src="/images/original-icon.svg" alt="" />
-                    <span>ORIGINALS</span>
-                </a>
-                <a>
-                    <img src="/images/movie-icon.svg" alt="" />
-                    <span>MOVIES</span>
-                </a>
-                <a>
-                    <img src="/images/series-icon.svg" alt="" />
-                    <span>SERIES</span>
-                </a>
-            </NavMenu>
+            { !userName ? (
+                <LoginContainer>
+                    <Login onClick={signIn}>Login</Login>
+                </LoginContainer> ) :
+                <>
+                <NavMenu>
+                    <a>
+                        <img src="/images/home-icon.svg" alt="" />
+                        <span>HOME</span>
+                    </a>
+                    <a>
+                        <img src="/images/search-icon.svg" alt="" />
+                        <span>SEARCH</span>
+                    </a>
+                    <a>
+                        <img src="/images/watchlist-icon.svg" alt="" />
+                        <span>WATCHLIST</span>
+                    </a>
+                    <a>
+                        <img src="/images/original-icon.svg" alt="" />
+                        <span>ORIGINALS</span>
+                    </a>
+                    <a>
+                        <img src="/images/movie-icon.svg" alt="" />
+                        <span>MOVIES</span>
+                    </a>
+                    <a>
+                        <img src="/images/series-icon.svg" alt="" />
+                        <span>SERIES</span>
+                    </a>
+                </NavMenu>
 
-            <UserImg src="https://scontent.fcai21-4.fna.fbcdn.net/v/t1.6435-9/187692994_1657475627795750_6347740854477241053_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=s6QIkT75LGAAX9wsR1D&tn=zygMXSW80AL2Gm3K&_nc_ht=scontent.fcai21-4.fna&oh=62884559192a797e65629fae39b4ad64&oe=612960AC" alt="" />
+                <UserImg onClick={signOut} src={userPhoto} alt={userName} />
+                </>
+            }
         </Nav>  
     )
 }
@@ -99,4 +154,27 @@ const UserImg = styled.img`
     height: 48px;
     border-radius: 50%;
     cursor: pointer;
+`
+
+const LoginContainer = styled.div`
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+`
+
+const Login = styled.div`
+    border: 1px solid #f9f9f9;
+    padding: 8px 16px;
+    border-radius: 4px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #f9f9f9;
+        color: #000000;
+        border-color: transparent;
+    }
 `

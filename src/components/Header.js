@@ -4,35 +4,35 @@ import styled from 'styled-components'
 function Header() {
     return (
         <Nav>
-            <Logo src="/images/logo.png" />
+            <Logo src="/images/logo.png" alt="" />
             <NavMenu>
                 <a>
-                    <img src="/images/home-icon.svg" />
+                    <img src="/images/home-icon.svg" alt="" />
                     <span>HOME</span>
                 </a>
                 <a>
-                    <img src="/images/search-icon.svg" />
+                    <img src="/images/search-icon.svg" alt="" />
                     <span>SEARCH</span>
                 </a>
                 <a>
-                    <img src="/images/watchlist-icon.svg" />
+                    <img src="/images/watchlist-icon.svg" alt="" />
                     <span>WATCHLIST</span>
                 </a>
                 <a>
-                    <img src="/images/original-icon.svg" />
+                    <img src="/images/original-icon.svg" alt="" />
                     <span>ORIGINALS</span>
                 </a>
                 <a>
-                    <img src="/images/movie-icon.svg" />
+                    <img src="/images/movie-icon.svg" alt="" />
                     <span>MOVIES</span>
                 </a>
                 <a>
-                    <img src="/images/series-icon.svg" />
+                    <img src="/images/series-icon.svg" alt="" />
                     <span>SERIES</span>
                 </a>
             </NavMenu>
 
-            <UserImg src="https://scontent.fcai21-4.fna.fbcdn.net/v/t1.6435-9/187692994_1657475627795750_6347740854477241053_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=s6QIkT75LGAAX9wsR1D&tn=zygMXSW80AL2Gm3K&_nc_ht=scontent.fcai21-4.fna&oh=62884559192a797e65629fae39b4ad64&oe=612960AC" />
+            <UserImg src="https://scontent.fcai21-4.fna.fbcdn.net/v/t1.6435-9/187692994_1657475627795750_6347740854477241053_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=s6QIkT75LGAAX9wsR1D&tn=zygMXSW80AL2Gm3K&_nc_ht=scontent.fcai21-4.fna&oh=62884559192a797e65629fae39b4ad64&oe=612960AC" alt="" />
         </Nav>  
     )
 }

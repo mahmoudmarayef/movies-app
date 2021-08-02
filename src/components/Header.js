@@ -59,7 +59,7 @@ function Header() {
                 </LoginContainer> ) :
                 <>
                 <NavMenu>
-                    <a>
+                    <a href="/">
                         <img src="/images/home-icon.svg" alt="" />
                         <span>HOME</span>
                     </a>
@@ -95,23 +95,56 @@ function Header() {
 export default Header
 
 const Nav = styled.nav`
-    height: 70px;
+    /*height: 70px;
     background-color: #090b13;
     display: flex;
     align-items: center;
     padding: 0 36px;
+    overflow-x: hidden;*/
+
+
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background-color: #090b13;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 36px;
+    transition: opacity .5s ease-out;
+    letter-spacing: 16px;
+    // background: transparent;
     overflow-x: hidden;
 `
 
 const Logo = styled.img`
+    /*width: 80px;*/
+
+    padding: 0;
     width: 80px;
+    margin-top: 4px;
+    max-height: 70px;
+    transition: all .2s ease 0s;
+    font-size: 0;
+    display: inline-block;
+
+    img {
+        display: block;
+        width: 100%;
+    }
 `
 
 const NavMenu = styled.div`
-    display: flex;
+    /*display: flex;
     flex: 1;
     margin-left: 25px;
     align-items: center;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+
     a {
         display: flex;
         align-items: center;
@@ -119,6 +152,7 @@ const NavMenu = styled.div`
         cursor: pointer;
         img {
             height: 20px;
+            z-index: auto;
         }
         span {
             font-size: 13px;
@@ -146,6 +180,72 @@ const NavMenu = styled.div`
                 opacity: 1;
             }
         }
+    }*/
+
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    height: 100%;
+    justify-content: flex-end;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    margin-right: auto;
+    margin-left: 25px;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+
+    a {
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        cursor: pointer;
+        text-decoration: none;
+
+        img {
+            height: 20px;
+            min-width: 20px;
+            width: 20px;
+            z-index: auto;
+        }
+
+        span {
+            color: rgb(249, 249, 249);
+            font-size: 13px;
+            letter-spacing: 1.42px;
+            line-height: 1.08;
+            margin-left: 8px;
+            padding: 2px 0px;
+            white-space: nowrap;
+            position: relative;
+
+            &:before {
+                background-color: rgb(249, 249, 249);
+                border-radius: 0px 0px 4px 4px;
+                bottom: -6px;
+                content: "";
+                height: 2px;
+                left: 0px;
+                opacity: 0;
+                position: absolute;
+                right: 0px;
+                transform-origin: left center;
+                transform: scaleX(0);
+                transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+                visibility: hidden;
+                width: auto;
+            }
+
+        }
+        &:hover {
+            span:before {
+                transform: scaleX(1);
+                visibility: visible;
+                opacity: 1 !important;
+            }
+        }
     }
 `
 
@@ -163,7 +263,7 @@ const LoginContainer = styled.div`
 `
 
 const Login = styled.div`
-    border: 1px solid #f9f9f9;
+    /*border: 1px solid #f9f9f9;
     padding: 8px 16px;
     border-radius: 4px;
     letter-spacing: 1.5px;
@@ -175,6 +275,20 @@ const Login = styled.div`
     &:hover {
         background-color: #f9f9f9;
         color: #000000;
+        border-color: transparent;
+    }*/
+
+    background-color: rgba(0,0,0,.6);
+    padding: 8px 16px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: 1px solid #f9f9f9;
+    border-radius: 4px;
+    transition: all .2s ease 0s;
+
+    &:hover {
+        background-color: #f9f9f9;
+        color: #000;
         border-color: transparent;
     }
 `
